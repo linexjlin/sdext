@@ -1,2 +1,4 @@
 # sdext
-a simple slashdot stories extractor
+a simple lib for extract stories from slashdot
+
+[example](./sdext_test)
