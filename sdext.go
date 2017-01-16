@@ -24,7 +24,7 @@ func getTitle(doc *html.Node) ALink {
 
 		for _, a := range n.Attr {
 			if a.Key == "id" {
-				p.id = strings.TrimPrefix(a.Val, "title-")
+				p.Id = strings.TrimPrefix(a.Val, "title-")
 			}
 
 			if a.Key == "class" && a.Val == "story-title" {
@@ -32,7 +32,7 @@ func getTitle(doc *html.Node) ALink {
 			}
 
 			if a.Key == "href" && linkReady {
-				p.link = strings.TrimPrefix(a.Val, "//")
+				p.Link = strings.TrimPrefix(a.Val, "//")
 				linkReady = false
 			}
 		}
@@ -42,7 +42,7 @@ func getTitle(doc *html.Node) ALink {
 		}
 	}
 	f(doc)
-	p.title = title
+	p.Title = title
 	return p
 }
 
@@ -86,8 +86,8 @@ func parseLink(doc *html.Node) (links []ALink) {
 }
 
 type ALink struct {
-	link               string
-	id, title, content string
+	Link               string
+	Id, Title, Content string
 }
 
 type UrlDone struct {
@@ -126,7 +126,7 @@ func extractContent(url, id string) string {
 var urlDoneMap = make(map[string]bool)
 
 func loadUrlDone(dataPath string) {
-	fi, err := os.Open(dataPath + "./.data.json")
+	fi, err := os.Open(dataPath + "/.data.json")
 	defer fi.Close()
 	if err != nil {
 		log.Println(err)
@@ -151,8 +151,8 @@ func Extracter(startPage, dataPath string) (res []ALink) {
 	loadUrlDone(dataPath)
 	links := extractLinks(startPage)
 	for _, a := range links {
-		if !urlDoneMap[a.link] {
-			a.content = extractContent("https://"+a.link, a.id)
+		if !urlDoneMap[a.Link] {
+			a.Content = extractContent("https://"+a.Link, a.Id)
 			res = append(res, a)
 		}
 

@@ -1,9 +1,13 @@
 # sdext
 a simple lib for extracting stories from slashdot
 
-Example:
+
+## Installation
 
 ``` go get github.com/linexjlin/sdext ```
+
+## Example:
+
 
 ```go
 package main
